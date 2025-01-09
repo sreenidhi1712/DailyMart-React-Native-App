@@ -16,6 +16,7 @@ const ProductList = () => {
         cookingEssentials,
         beveragesAndSnacks,
         fruitsAndVegetables,
+        favourite
       } = useContext(Context);
 
       useEffect(() => {
@@ -43,6 +44,7 @@ const ProductList = () => {
             items={item}
             addToCart={addToCart}
             favouritings={addtofavourites}
+            favourites={favourite}
           />
         )}
       />

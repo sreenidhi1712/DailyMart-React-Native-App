@@ -13,6 +13,7 @@ const Category = () => {
     const [data, setData] = useState([]);
     const {
         products,
+        favourite,
       } = useContext(Context);
 
         useEffect(() => {
@@ -38,6 +39,7 @@ const Category = () => {
             width={44}
             addToCart={addToCart}
             favouritings={addtofavourites}
+            favourites={favourite}
           />
         )}
       />

@@ -14,7 +14,7 @@ export default function ProductDetails({  }) {
 
   const route = useRoute()
   const { itemID } = route.params
-  const {products,cart} = useContext(Context);
+  const {products,cart,favourite} = useContext(Context);
   const [currentItem, setCurrentItem] = useState(null);
   const [toggleAddtoCart, setToggleAddtoCart] = useState(false);
 
@@ -104,8 +104,8 @@ export default function ProductDetails({  }) {
                 </View>
 
           </View>
-           <View className="absolute bg-green-200 right-2 top-2 p-2 rounded-full flex items-center justify-center">
-                     <Ionicons name="heart" size={24} color="red" onPress={() => favouritings(individualProduct._id)}/>
+           <View className={`absolute ${favourite.some((favItem) => favItem.favouriteProduct === individualProduct._id) ? 'bg-red-200' : 'bg-green-200'} right-2 top-2 p-2 rounded-full flex items-center justify-center`}>
+                     <Ionicons name="heart" size={24}  color={`${favourite.some((favItem) => favItem.favouriteProduct === individualProduct._id) ? 'red' : 'green'}`}  onPress={() => addtofavourites(individualProduct)}/>
           </View>
       </View>
       <View className="flex flex-col w-[92%] mt-3 items-center rounded-lg bg-white p-4">
@@ -124,6 +124,7 @@ export default function ProductDetails({  }) {
             items={item}
             addToCart={addToCart}
             favouritings={addtofavourites}
+            favourites={favourite}
           />
         )}
       />

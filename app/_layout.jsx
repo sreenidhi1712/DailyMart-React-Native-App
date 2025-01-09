@@ -19,8 +19,7 @@ const _layout = () => {
           
           tabBarStyle: {
             backgroundColor: 'white',
-            height: 70,
-            paddingBottom: 10,
+            height: 60,
           },
           tabBarIcon: ({ focused, color, size }) => {
             let iconName

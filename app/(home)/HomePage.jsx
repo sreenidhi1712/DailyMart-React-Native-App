@@ -23,6 +23,7 @@ const navigation = useNavigation();
         dairyProduct,
         cookingEssentials,
         beveragesAndSnacks,
+        favourite
         
       } = useContext(Context);
 
@@ -54,10 +55,11 @@ const navigation = useNavigation();
             items={item}
             addToCart={addToCart}
             favouritings={addtofavourites}  
+            favourites={favourite}
           />
         )}
         ListFooterComponent={()=><Pressable onPress={()=>navigation.navigate("ProductList",{category:"products"})}
-        className="w-[100%] mr-2 bg-purple-300 justify-center rounded-full  flex items-center p-4 mt-32">
+        className="w-[100%] mr-2 bg-green-300 justify-center rounded-full  flex items-center p-4 mt-32">
           <Text className="text-xl text-white font-bold ">View All</Text>
         </Pressable>}
       />
@@ -76,6 +78,7 @@ const navigation = useNavigation();
             items={item}
             addToCart={addToCart}
             favouritings={addtofavourites}
+            favourites={favourite}
             
           />
         )}
@@ -103,6 +106,7 @@ const navigation = useNavigation();
             items={item}
             addToCart={addToCart}
             favouritings={addtofavourites}
+            favourites={favourite}
             
           />
         )}
@@ -129,6 +133,7 @@ const navigation = useNavigation();
             items={item}
             addToCart={addToCart}
             favouritings={addtofavourites}
+            favourites={favourite}
             
           />
         )}

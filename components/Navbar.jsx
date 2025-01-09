@@ -8,7 +8,7 @@ import useProductActions from '../utils/useProductActions'
 const Navbar = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [filteredProducts, setFilteredProducts] = useState([])
-  const { products } = useContext(Context);
+  const { products,favourite } = useContext(Context);
     const { addToCart, addtofavourites } = useProductActions;
 
   useEffect(() => {
@@ -55,6 +55,7 @@ const Navbar = () => {
             items={item}
             addToCart={addToCart}
             favouritings={addtofavourites}
+            favourites={favourite}
           />
         )}
       />
