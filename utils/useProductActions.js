@@ -1,0 +1,149 @@
+import axios from 'axios';
+import { Context } from '../Context/Context';
+import { useContext } from 'react';
+
+  const url = "https://daily-mart-mern-stack-project.onrender.com";
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZGQ3OTQxYWE3YWYwZjA3Zjc4MjJkMiIsImlhdCI6MTcyNTk1MTM2M30.ZITLummc9bVbRM3LrJ-_u07IVsJdQYgP3AIJPhedC18";
+  
+const useProductActions =()=>{
+
+    const {
+        cart,
+        favourite,
+        setCart,
+        setFavourite
+        
+      } = useContext(Context);
+      
+const addToCart =  async (item) => {
+    try {
+      const cartItems = [{ item: item._id, quantity: 1 }];
+       await axios.post(`${url}/api/cart/add`, { cart: cartItems },{headers: { token }});
+
+           // Update local state
+           setCart((prevCart) => {
+      const isItemPresent = prevCart.find((cartItem) => cartItem.item === item._id);
+      if (isItemPresent) {
+        return prevCart.map((cartItem) =>
+          cartItem.item === item._id
+            ? { ...cartItem, quantity: cartItem.quantity + 1 }
+            : cartItem
+        );
+      } else {
+        return [...prevCart, { item: item._id, quantity: 1 }];
+      }
+    });
+
+      
+     } catch (error) {
+       console.error('Error incrementing item', error);
+     }
+  
+   };
+
+   const addtofavourites =  async (item) => {
+    const isItemPresent = favourite.find((favouriteItem) => favouriteItem.favouriteProduct === item._id);
+    console.log(isItemPresent);
+    if(isItemPresent){
+      try {
+        await axios.post(`${url}/api/favourite/remove`, {
+          itemId: item._id,
+        },{headers: { token }});
+         // Update local state
+         setFavourite((prevFavourites) =>
+        prevFavourites.filter((favouriteItem) => favouriteItem.favouriteProduct !== item._id)
+      );
+
+      } catch (error) {
+        console.error('Error incrementing item', error);
+      }
+    }else{
+      try {
+        const favouriteItems = [{ favouriteProduct: item._id }];
+         await axios.post(`${url}/api/favourite/add`, {
+          favouriteItems,
+         },{headers: { token }});
+           // Update local state
+      setFavourite((prevFavourites) => [
+        ...prevFavourites,
+        { favouriteProduct: item._id },
+      ]);
+
+        
+       } catch (error) {
+         console.error('Error incrementing item', error);
+       }
+    }
+  
+    }
+
+    const increment = async (item) => {
+      try {
+         await axios.post(`${url}/api/cart/increment`, {
+           itemId: item._id,
+         },{headers: { token }});
+  
+         setCart((prevCart) =>
+          prevCart.map((cartItem) =>
+            cartItem.item === item._id
+              ? { ...cartItem, quantity: cartItem.quantity + 1 }
+              : cartItem
+          )
+        );
+        
+       } catch (error) {
+         console.error('Error incrementing item', error);
+       }
+   
+     };
+     const decrement = async (item) => {
+      try {
+         await axios.post(`${url}/api/cart/decrement`, {
+           itemId: item._id,
+         },{headers: { token }});
+  
+         const itemIndex = cart.findIndex(cartItem => cartItem.item === item._id);
+         if (itemIndex !== -1) {
+          if (cart[itemIndex].quantity > 1) {
+            setCart((prevCart) =>
+              prevCart.map((cartItem) =>
+                cartItem.item === item._id
+                  ? { ...cartItem, quantity: cartItem.quantity - 1 }
+                  : cartItem
+              )
+            );
+          } else if (cart[itemIndex].quantity === 1) {
+            setCart((prevCart) =>
+              prevCart.filter((cartItem) => cartItem.item !== item._id)
+            );
+          }
+        } else {
+         console.error('Item not found in cart');
+        }
+        
+       } catch (error) {
+         console.error('Error decrementing item', error);
+       }
+   
+     };
+  
+     const RemoveItem =  async (item) => {
+      try {
+         await axios.post(`${url}/api/cart/remove`, {
+           itemId: item._id,
+         },{headers: { token }});
+  
+           // Update local state
+      setCart((prevCart) =>
+        prevCart.filter((cartItem) => cartItem.item !== item._id)
+      );
+        
+       } catch (error) {
+         console.error('Error incrementing item', error);
+       }
+   
+     };
+    return { addToCart, addtofavourites, increment, decrement, RemoveItem };
+};
+
+export default useProductActions;
