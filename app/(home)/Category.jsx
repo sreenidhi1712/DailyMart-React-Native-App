@@ -1,9 +1,11 @@
-import { SafeAreaView, FlatList } from 'react-native'
+import { SafeAreaView, FlatList, ScrollView } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
 import { Context } from '../../Context/Context';
 import ProductContainer from '../../components/ProductContainer';
 import useProductActions from '../../utils/useProductActions';
 import { useRoute } from '@react-navigation/native'
+import { Text ,View} from 'react-native';
+
 
 const Category = () => {
 
@@ -25,13 +27,16 @@ const Category = () => {
               }
             }, [category, products]);
   return (
-    <SafeAreaView className="w-full flex items-center">
+    <SafeAreaView className="w-full flex items-center ">
+    <View className="w-full flex items-center p-3">
+    <Text className="text-3xl font-extrabold text-green-800 ">{category}</Text>
+    </View>
       <FlatList
         data={data}
         keyExtractor={(item) => item._id}
         numColumns={2} 
         columnWrapperStyle={{ justifyContent: 'space-between' }} 
-        showsVerticalScrollIndicator={false}
+       showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
           <ProductContainer
             key={item._id}

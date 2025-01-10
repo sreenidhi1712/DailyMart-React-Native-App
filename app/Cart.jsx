@@ -3,11 +3,11 @@ import React, { useContext, useState,useEffect } from 'react'
 import { Context } from '../Context/Context';
 import { useNavigation } from '@react-navigation/native';
 import useProductActions from '../utils/useProductActions';
-
+import { Ionicons } from 'react-native-vector-icons'
 
 const Cart = () => {
 
-  const { products ,cart,} = useContext(Context);
+  const { products ,cart} = useContext(Context);
   const navigate = useNavigation();
   const {increment,decrement} = useProductActions();
 
@@ -49,11 +49,18 @@ const Cart = () => {
 
       <ScrollView className="w-full h-full bg-slate-100 " showsVerticalScrollIndicator={false} >
 
-      <KeyboardAvoidingView behavior='padding' className="w-full flex-1 flex items-center bg-slate-100">
+      <KeyboardAvoidingView  className="w-full flex-1 flex items-center bg-slate-100">
 
      
       {/* Items and its quantity display here */}
+      <View>
+        <Text className="text-3xl font-extrabold mt-5 text-green-800 mb-2">Cart</Text>
+      </View>
 
+       {cart.length === 0 ? <View className='flex   items-center mt-20 w-[80%]'> 
+        <Ionicons name="cart" color="black" size={70} />
+       <Text className='text-4xl  mt-5'>No Items in cart,please add some</Text>
+       </View> :<>
       <View className="w-[90%] bg-white rounded-xl mt-5 h-auto  flex items-center">
       {productWithDetails.map((items) => (
                 <View className="w-[100%]  p-2 flex flex-row justify-between items-center" key={items._id}>
@@ -86,7 +93,10 @@ const Cart = () => {
                 </View>
         ))}
       </View>
+
+
 {/* Items total display here */}
+
       <View className="w-[90%] bg-white rounded-xl mt-5 h-auto p-3 flex items-center">
            <View className='flex flex-row justify-between items-center w-[100%] p-2'>
                <Text className="font-bold text-slate-500">
@@ -136,6 +146,8 @@ const Cart = () => {
       <View className="w-[90%] bg-white rounded-xl mt-5 h-auto p-3 flex items-center mb-7">
          <Text className="font-bold">Kindly note - Accepting only Cash On Delivery</Text>
       </View>
+      </>
+}
       </KeyboardAvoidingView>
 </ScrollView>
     </SafeAreaView>
@@ -143,3 +155,4 @@ const Cart = () => {
 }
 
 export default Cart
+

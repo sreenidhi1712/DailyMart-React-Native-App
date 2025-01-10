@@ -3,7 +3,6 @@ import React, { useContext } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import ProductContainer from '../../components/ProductContainer';
 import { Context } from '@/Context/Context';
-import axios from 'axios';
 import { FlatList, Pressable, ScrollView, Text, View } from 'react-native';
 import Navbar from '../../components/Navbar';
 import Category from '../../components/Category';
@@ -11,10 +10,6 @@ import { useNavigation } from '@react-navigation/native';
 import useProductActions from '../../utils/useProductActions';
 
 
-
-
-const url = "https://daily-mart-mern-stack-project.onrender.com";
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZGQ3OTQxYWE3YWYwZjA3Zjc4MjJkMiIsImlhdCI6MTcyNTk1MTM2M30.ZITLummc9bVbRM3LrJ-_u07IVsJdQYgP3AIJPhedC18";
 
 const HomePage = () => {
 const navigation = useNavigation();
@@ -63,6 +58,7 @@ const navigation = useNavigation();
           <Text className="text-xl text-white font-bold ">View All</Text>
         </Pressable>}
       />
+ 
       <View className="w-full flex items-center pb-4 mt-5">
        <Text className="text-3xl font-extrabold  self-start ml-5">Beverages and Snacks</Text>
     </View>

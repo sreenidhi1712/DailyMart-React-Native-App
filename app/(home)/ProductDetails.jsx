@@ -17,6 +17,7 @@ export default function ProductDetails({  }) {
   const {products,cart,favourite} = useContext(Context);
   const [currentItem, setCurrentItem] = useState(null);
   const [toggleAddtoCart, setToggleAddtoCart] = useState(false);
+  
 
   const individualProduct = products.find((product) => product._id === itemID);
   const relatedProducts = products.filter(

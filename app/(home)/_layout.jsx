@@ -1,7 +1,7 @@
 
 import React from 'react'
 import { Stack } from 'expo-router'
-import ProductList from './ProductList'
+
 
 
 const HomeLayout = () => {
@@ -11,6 +11,10 @@ const HomeLayout = () => {
         <Stack.Screen name="ProductDetails"  options={{title:"Products",headerShown:false}}/>
         <Stack.Screen name='ProductList'  options={{title:"ProductList",headerShown:false}}/>
         <Stack.Screen name='Category'  options={{title:"Category",headerShown:false}}/>
+        <Stack.Screen name='OrderDetails'  options={{headerShown: true,
+          headerLeft: () => "", 
+          headerTitleAlign:"left"
+        }}/>
     </Stack>
   )
 }

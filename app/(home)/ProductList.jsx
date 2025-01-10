@@ -32,6 +32,7 @@ const ProductList = () => {
       }, [beveragesAndSnacks, category, cookingEssentials, dairyProduct, fruitsAndVegetables]);
   return (
     <SafeAreaView className="w-full flex items-center">
+
       <FlatList
         data={data}
         keyExtractor={(item) => item._id}

@@ -11,7 +11,8 @@ const useProductActions =()=>{
         cart,
         favourite,
         setCart,
-        setFavourite
+        setFavourite,
+        setOrders
         
       } = useContext(Context);
       
@@ -143,7 +144,38 @@ const addToCart =  async (item) => {
        }
    
      };
-    return { addToCart, addtofavourites, increment, decrement, RemoveItem };
+
+    //  const removefavourites =  async (item) => {
+    //   try {
+    //      await axios.post(`${url}/api/favourite/remove`, {
+    //        itemId: item._id,
+    //      },{headers: { token }});
+ 
+    //      setFavourite((prevFavourites) =>
+    //        prevFavourites.filter((favouriteItem) => favouriteItem.favouriteProduct !== item._id)
+    //      );
+   
+        
+    //    } catch (error) {
+    //      console.error('Error incrementing item', error);
+    //    }
+   
+    //  };
+
+    const getOrders = async () => {
+      try {
+        const response =await axios.post(`${url}/api/order/userorders`, {},
+          { headers : { token } })
+        const Orders =  response.data.data; 
+        setOrders(Orders);
+      } catch (error) {
+        console.error('Error fetching user data', error);
+      }finally{
+        setLoading(false);
+      }
+    }
+
+    return { addToCart, addtofavourites, increment, decrement, RemoveItem ,getOrders};
 };
 
 export default useProductActions;
