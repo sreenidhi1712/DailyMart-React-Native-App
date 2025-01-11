@@ -4,10 +4,11 @@ import { Context } from '../Context/Context';
 import { useNavigation } from '@react-navigation/native';
 import useProductActions from '../utils/useProductActions';
 import { Ionicons } from 'react-native-vector-icons'
+import CartSkeleton from '../components/LoadingSkeletons/CartSkeleton';
 
 const Cart = () => {
 
-  const { products ,cart} = useContext(Context);
+  const { products ,cart,loading} = useContext(Context);
   const navigate = useNavigation();
   const {increment,decrement} = useProductActions();
 
@@ -46,6 +47,9 @@ const Cart = () => {
   };
   return (
     <SafeAreaView className="flex-1  ">
+      {loading ?<CartSkeleton/>: <View className="w-full ">
+        
+     
 
       <ScrollView className="w-full h-full bg-slate-100 " showsVerticalScrollIndicator={false} >
 
@@ -150,6 +154,8 @@ const Cart = () => {
 }
       </KeyboardAvoidingView>
 </ScrollView>
+
+</View>}
     </SafeAreaView>
   )
 }

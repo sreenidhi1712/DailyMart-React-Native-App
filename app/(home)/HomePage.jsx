@@ -29,7 +29,7 @@ const navigation = useNavigation();
 
   return (
     <SafeAreaView style={{flex: 1,alignItems:"center"}} > 
-    {!loading ? <View className="w-full h-full bg-white">
+    {loading ? <View className="w-full h-full bg-white">
        <HomePageSkeleton/>
     </View> :
     <View className="w-full h-full bg-white">

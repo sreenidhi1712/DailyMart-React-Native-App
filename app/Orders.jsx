@@ -3,13 +3,14 @@ import React, { useContext, useEffect } from 'react'
 import { Context } from '../Context/Context';
 import useProductActions from '../utils/useProductActions';
 import { useNavigation } from '@react-navigation/native';
+import OrdersSkeleton from '../components/LoadingSkeletons/OrdersSkeleton';
 
 
-const url = "https://daily-mart-mern-stack-project.onrender.com";
+
 
 const Orders = () => {
   const navigation = useNavigation();
-  const { orders, products} = useContext(Context);
+  const { orders, products,orderLoading} = useContext(Context);
   const {getOrders} = useProductActions();
   const sortedOrders = [...orders].sort((a, b) => new Date(b.date) - new Date(a.date))
   useEffect(() => {
@@ -17,20 +18,18 @@ const Orders = () => {
   }, [orders]);
   return (
       <SafeAreaView className="flex-1  ">
-      
-       
+      {orderLoading?<OrdersSkeleton/>:
+       <View className="w-full ">
+
+
       <View className="w-full flex items-center p-3">
       <Text className="text-3xl text-green-800 font-extrabold">Orders</Text>
       </View>
-      <ScrollView className="w-full " showsVerticalScrollIndicator={false} >
+      <ScrollView className="w-full mb-20" showsVerticalScrollIndicator={false} >
 
 <View className="w-full flex items-center p-3 gap-4">
   
-      {orders.length === 0 ? 
-      <View className="text-center text-gray-700">
-      <Text className="text-xl">No orders placed yet.</Text>
-    </View> :
-      sortedOrders.map((order) => (
+      { sortedOrders.map((order) => (
           <View className="w-full flex items-center p-3 bg-white rounded-lg relative" key={order._id}>
               
               
@@ -58,7 +57,8 @@ const Orders = () => {
    
         
       </ScrollView>
-      
+      </View>
+      }
     </SafeAreaView>
   )
 }

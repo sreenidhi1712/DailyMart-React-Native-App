@@ -4,10 +4,11 @@ import { Context } from '../Context/Context';
 import useProductActions from '../utils/useProductActions';
 import ProductContainer from '../components/ProductContainer';
 import { Ionicons } from 'react-native-vector-icons'
+import FavouriteSkeleton from '../components/LoadingSkeletons/FavouriteSkeleton';
 
 const Favourite = () => {
 
-  const { favourite, products } = useContext(Context);
+  const { favourite, products,loading } = useContext(Context);
   const {addToCart,addtofavourites} = useProductActions();
   const [favouriteProduct, setFavouriteProduct] = useState([]);
 
@@ -33,6 +34,9 @@ const Favourite = () => {
 
   return (
     <SafeAreaView className="w-full flex items-center">
+      {loading ? <FavouriteSkeleton/>: <View className="w-full flex items-center">
+
+   
       <View className="w-full flex items-center p-3">
       <Text className="text-3xl font-extrabold text-green-800 ">Favourites</Text>
       </View>
@@ -59,6 +63,7 @@ const Favourite = () => {
           />
         )}
       />
+         </View>}
     </SafeAreaView>
   )
 }

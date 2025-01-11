@@ -12,7 +12,8 @@ const useProductActions =()=>{
         favourite,
         setCart,
         setFavourite,
-        setOrders
+        setOrders,
+        setOrderLoading
         
       } = useContext(Context);
       
@@ -171,7 +172,7 @@ const addToCart =  async (item) => {
       } catch (error) {
         console.error('Error fetching user data', error);
       }finally{
-        setLoading(false);
+        setOrderLoading(false);
       }
     }
 

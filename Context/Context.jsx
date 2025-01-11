@@ -9,6 +9,7 @@ const ContextProvider = (props) => {
   const [orders, setOrders] = useState([]);
   const [cart, setCart] = useState([]);
   const [favourite, setFavourite] = useState([]);
+  const [orderLoading, setOrderLoading] = useState(false);
 
 
   const fruitsAndVegetables = products.filter((item) => item.category === 'Fruits' || item.category === 'Vegetables');
@@ -33,6 +34,8 @@ const ContextProvider = (props) => {
     setCart,
     favourite,
     setFavourite,
+    orderLoading,
+    setOrderLoading,
   };
 
   return (
