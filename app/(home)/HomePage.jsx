@@ -8,6 +8,7 @@ import Navbar from '../../components/Navbar';
 import Category from '../../components/Category';
 import { useNavigation } from '@react-navigation/native';
 import useProductActions from '../../utils/useProductActions';
+import HomePageSkeleton from '../../components/LoadingSkeletons/HomePageSkeleton';
 
 
 
@@ -18,7 +19,8 @@ const navigation = useNavigation();
         dairyProduct,
         cookingEssentials,
         beveragesAndSnacks,
-        favourite
+        favourite,
+        loading,
         
       } = useContext(Context);
 
@@ -27,6 +29,10 @@ const navigation = useNavigation();
 
   return (
     <SafeAreaView style={{flex: 1,alignItems:"center"}} > 
+    {!loading ? <View className="w-full h-full bg-white">
+       <HomePageSkeleton/>
+    </View> :
+    <View className="w-full h-full bg-white">
        <Navbar/>
     <ScrollView 
         showsVerticalScrollIndicator={false} // Hide vertical scrollbar
@@ -140,6 +146,8 @@ const navigation = useNavigation();
       />
 
         </ScrollView> 
+        </View>
+}
     </SafeAreaView>
   )
 }

@@ -37,7 +37,12 @@ const Favourite = () => {
       <Text className="text-3xl font-extrabold text-green-800 ">Favourites</Text>
       </View>
     
-      {favouriteProduct.length === 0 && <View className='flex   items-center mt-20 w-[80%]'> <Ionicons name="heart" color="black" size={70} /><Text className='text-4xl  mt-5'>No favourites,please add some</Text></View> }
+      {
+      favouriteProduct.length === 0 && <View className='flex   items-center mt-20 w-[80%]'> 
+        <Ionicons name="heart" color="black" size={70} />
+        <Text className='text-4xl  mt-5'>No favourites,please add some</Text>
+        </View> 
+        }
      <FlatList
         data={favouriteProduct}
         keyExtractor={(item) => item._id}
