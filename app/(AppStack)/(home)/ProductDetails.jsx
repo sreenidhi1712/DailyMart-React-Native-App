@@ -1,11 +1,11 @@
 import { View, Text, FlatList, ScrollView, Image, Pressable } from 'react-native'
 import React, { useEffect } from 'react'
 import { useRoute } from '@react-navigation/native'
-import useProductActions from '../../utils/useProductActions'
+import useProductActions from '../../../utils/useProductActions'
 import { Ionicons } from 'react-native-vector-icons'
 import { useContext,useState } from 'react'
-import { Context } from '../../Context/Context'
-import ProductContainer from '../../components/ProductContainer'
+import { Context } from '../../../Context/Context'
+import ProductContainer from '../../../components/ProductContainer'
 
 
 const url = "https://daily-mart-mern-stack-project.onrender.com";

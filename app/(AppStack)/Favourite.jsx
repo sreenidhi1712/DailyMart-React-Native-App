@@ -1,10 +1,10 @@
 import { View, Text, SafeAreaView, FlatList } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
-import { Context } from '../Context/Context';
-import useProductActions from '../utils/useProductActions';
-import ProductContainer from '../components/ProductContainer';
+import { Context } from '../../Context/Context';
+import useProductActions from '../../utils/useProductActions';
+import ProductContainer from '../../components/ProductContainer';
 import { Ionicons } from 'react-native-vector-icons'
-import FavouriteSkeleton from '../components/LoadingSkeletons/FavouriteSkeleton';
+import FavouriteSkeleton from '../../components/LoadingSkeletons/FavouriteSkeleton';
 
 const Favourite = () => {
 

@@ -1,7 +1,7 @@
 import { View, Text, SafeAreaView } from 'react-native'
 import React, { useContext, useEffect } from 'react'
 import { useRoute } from '@react-navigation/native'
-import { Context } from '../../Context/Context';
+import { Context } from '../../../Context/Context';
 import { useNavigation } from 'expo-router';
 
 

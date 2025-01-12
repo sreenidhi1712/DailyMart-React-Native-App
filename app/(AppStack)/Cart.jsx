@@ -1,17 +1,16 @@
 import { View, Text, SafeAreaView, Pressable, TextInput, KeyboardAvoidingView, ScrollView } from 'react-native'
 import React, { useContext, useState,useEffect } from 'react'
-import { Context } from '../Context/Context';
+import { Context } from '../../Context/Context';
 import { useNavigation } from '@react-navigation/native';
-import useProductActions from '../utils/useProductActions';
+import useProductActions from '../../utils/useProductActions';
 import { Ionicons } from 'react-native-vector-icons'
-import CartSkeleton from '../components/LoadingSkeletons/CartSkeleton';
+import CartSkeleton from '../../components/LoadingSkeletons/CartSkeleton';
 
 const Cart = () => {
 
   const { products ,cart,loading} = useContext(Context);
   const navigate = useNavigation();
-  const {increment,decrement} = useProductActions();
-
+  const {increment,decrement,handleCheckout} = useProductActions();
   const [total, setTotal] = useState(0);
   const [productWithDetails, setProductWithDetails] = useState([]);
   const [address, setAddress] = useState('');
@@ -42,9 +41,11 @@ const Cart = () => {
     fetchProductDetails();
   }, [ cart, products]);
 
-  const handleCheckout = () => {
-    navigate.navigate('Orders');
-  };
+ const checkoutButton = async(navigate,cart,total,address)=>{
+    await handleCheckout(navigate,cart,total,address);
+    setAddress('');
+ }
+
   return (
     <SafeAreaView className="flex-1  ">
       {loading ?<CartSkeleton/>: <View className="w-full ">
@@ -140,7 +141,7 @@ const Cart = () => {
            </View>
 
            <View>
-                <Pressable onPress={handleCheckout} disabled={address === ''} >
+                <Pressable onPress={()=>checkoutButton(navigate,cart,total,address)} disabled={address === ''} >
                     <View className={`w-[100%] bg-green-300 justify-center rounded-lg  flex items-center p-4 mt-5 ${address === '' ? 'bg-slate-200' : ''}`}>
                         <Text className="text-xl text-white font-bold ">Checkout</Text>
                     </View>

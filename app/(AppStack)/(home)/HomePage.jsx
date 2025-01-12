@@ -1,14 +1,14 @@
 
 import React, { useContext } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import ProductContainer from '../../components/ProductContainer';
-import { Context } from '@/Context/Context';
+import ProductContainer from '../../../components/ProductContainer';
+import { Context } from '../../../Context/Context';
 import { FlatList, Pressable, ScrollView, Text, View } from 'react-native';
-import Navbar from '../../components/Navbar';
-import Category from '../../components/Category';
+import Navbar from '../../../components/Navbar';
+import Category from '../../../components/Category';
 import { useNavigation } from '@react-navigation/native';
-import useProductActions from '../../utils/useProductActions';
-import HomePageSkeleton from '../../components/LoadingSkeletons/HomePageSkeleton';
+import useProductActions from '../../../utils/useProductActions';
+import HomePageSkeleton from '../../../components/LoadingSkeletons/HomePageSkeleton';
 
 
 

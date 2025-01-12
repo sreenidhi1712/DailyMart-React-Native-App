@@ -1,8 +1,8 @@
 import { View, Text, SafeAreaView, ScrollView, FlatList } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
-import { Context } from '../../Context/Context';
-import ProductContainer from '../../components/ProductContainer';
-import useProductActions from '../../utils/useProductActions';
+import { Context } from '../../../Context/Context';
+import ProductContainer from '../../../components/ProductContainer';
+import useProductActions from '../../../utils/useProductActions';
 import { useRoute } from '@react-navigation/native'
 
 const ProductList = () => {

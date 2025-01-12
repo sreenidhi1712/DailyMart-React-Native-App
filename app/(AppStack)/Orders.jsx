@@ -1,27 +1,29 @@
 import { View, Text, SafeAreaView, ScrollView, Image, Pressable } from 'react-native'
 import React, { useContext, useEffect } from 'react'
-import { Context } from '../Context/Context';
-import useProductActions from '../utils/useProductActions';
+import { Context } from '../../Context/Context';
+import useProductActions from '../../utils/useProductActions';
 import { useNavigation } from '@react-navigation/native';
-import OrdersSkeleton from '../components/LoadingSkeletons/OrdersSkeleton';
+import OrdersSkeleton from '../../components/LoadingSkeletons/OrdersSkeleton';
 
 
 
 
 const Orders = () => {
   const navigation = useNavigation();
-  const { orders, products,orderLoading} = useContext(Context);
+  const { orders, products,orderLoading,setOrderLoading} = useContext(Context);
   const {getOrders} = useProductActions();
   const sortedOrders = [...orders].sort((a, b) => new Date(b.date) - new Date(a.date))
-  useEffect(() => {
-    getOrders();
-  }, [orders]);
+  useEffect( () => {
+    const fetchOrders = async () =>{
+    await getOrders();
+    setOrderLoading(false);
+    }
+    fetchOrders();
+  }, [orders, getOrders]);
   return (
       <SafeAreaView className="flex-1  ">
       {orderLoading?<OrdersSkeleton/>:
        <View className="w-full ">
-
-
       <View className="w-full flex items-center p-3">
       <Text className="text-3xl text-green-800 font-extrabold">Orders</Text>
       </View>
@@ -40,7 +42,7 @@ const Orders = () => {
                {order.orderItems.map((item,index) => {
         const product = products.find((product) => product._id === item.item);
         return (
-              <Text key={index} className="font-light">{product.name}*{item.quantity}, </Text>
+              <Text key={index} className="font-light">{product?.name}*{item.quantity}, </Text>
     );
       })}
       </View>

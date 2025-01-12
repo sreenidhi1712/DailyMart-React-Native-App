@@ -1,8 +1,8 @@
 import { SafeAreaView, FlatList, ScrollView } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
-import { Context } from '../../Context/Context';
-import ProductContainer from '../../components/ProductContainer';
-import useProductActions from '../../utils/useProductActions';
+import { Context } from '../../../Context/Context';
+import ProductContainer from '../../../components/ProductContainer';
+import useProductActions from '../../../utils/useProductActions';
 import { useRoute } from '@react-navigation/native'
 import { Text ,View} from 'react-native';
 
@@ -36,6 +36,8 @@ const Category = () => {
         keyExtractor={(item) => item._id}
         numColumns={2} 
         columnWrapperStyle={{ justifyContent: 'space-between' }} 
+        ListFooterComponent={()=><View className="w-[100%]  h-20  p-4"></View>}
+        
        showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
           <ProductContainer

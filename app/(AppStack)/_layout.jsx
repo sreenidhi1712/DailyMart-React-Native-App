@@ -2,8 +2,8 @@ import React from 'react'
 import { Tabs } from 'expo-router'
 import 'nativewind'
 import 'tailwindcss/tailwind.css'
-import "../global.css"
-import ContextProvider from '@/Context/Context'
+import "../../global.css"
+import ContextProvider from '../../Context/Context'
 import { Ionicons } from 'react-native-vector-icons'
 
 

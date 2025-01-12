@@ -2,7 +2,7 @@
 import React from 'react'
 import HomePage from './HomePage'
 import { useContext,useEffect } from 'react'
-import { Context } from '@/Context/Context'
+import { Context } from '../../../Context/Context'
 import axios from 'axios'
 const url = "https://daily-mart-mern-stack-project.onrender.com";
 const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZGQ3OTQxYWE3YWYwZjA3Zjc4MjJkMiIsImlhdCI6MTcyNTk1MTM2M30.ZITLummc9bVbRM3LrJ-_u07IVsJdQYgP3AIJPhedC18";

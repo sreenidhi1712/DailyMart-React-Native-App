@@ -13,7 +13,7 @@ const useProductActions =()=>{
         setCart,
         setFavourite,
         setOrders,
-        setOrderLoading
+        setOrderLoading,
         
       } = useContext(Context);
       
@@ -171,12 +171,37 @@ const addToCart =  async (item) => {
         setOrders(Orders);
       } catch (error) {
         console.error('Error fetching user data', error);
-      }finally{
-        setOrderLoading(false);
       }
     }
 
-    return { addToCart, addtofavourites, increment, decrement, RemoveItem ,getOrders};
+    const handleCheckout = async (navigation,cart,total,address) => {
+      try {
+        const response = await axios.post(`${url}/api/order/place`, {
+          items: cart,
+          amount: total,
+          address:address,
+        }, {
+          headers: { token }
+        });
+        if (response.data.success) {
+          try {
+           await axios.post(`${url}/api/cart/clear`, {}, {
+              headers: { token }
+            });
+            if(response.data.success){
+              setCart([]);
+              navigation.navigate('Orders');
+            }
+          } catch (error) {
+            console.error('Error emptying cart', error);
+          }
+        }
+      } catch (error) {
+        console.error('Error placing order', error);
+      }
+    };
+
+    return { addToCart, addtofavourites, increment, decrement, RemoveItem ,getOrders,handleCheckout};
 };
 
 export default useProductActions;
