@@ -1,4 +1,5 @@
-import { createContext, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { createContext, useEffect, useState } from "react";
 
 export const Context = createContext();
 
@@ -10,6 +11,7 @@ const ContextProvider = (props) => {
   const [cart, setCart] = useState([]);
   const [favourite, setFavourite] = useState([]);
   const [orderLoading, setOrderLoading] = useState(false);
+  const [userToken, setUserToken] = useState(null);
 
 
   const fruitsAndVegetables = products.filter((item) => item.category === 'Fruits' || item.category === 'Vegetables');
@@ -36,7 +38,23 @@ const ContextProvider = (props) => {
     setFavourite,
     orderLoading,
     setOrderLoading,
+    userToken,
+    setUserToken,
   };
+
+  useEffect(() => {
+    const fetchToken = async () => {
+        console.log('im in auth context')
+      await AsyncStorage.getItem('userToken').then((value) => {
+        if (value !== null) {
+          setUserToken(value);
+          
+        }
+      });
+    };
+    fetchToken();
+  }, []);
+
 
   return (
     // eslint-disable-next-line react/prop-types

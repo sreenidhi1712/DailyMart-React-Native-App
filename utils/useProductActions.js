@@ -3,7 +3,7 @@ import { Context } from '../Context/Context';
 import { useContext } from 'react';
 
   const url = "https://daily-mart-mern-stack-project.onrender.com";
-  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZGQ3OTQxYWE3YWYwZjA3Zjc4MjJkMiIsImlhdCI6MTcyNTk1MTM2M30.ZITLummc9bVbRM3LrJ-_u07IVsJdQYgP3AIJPhedC18";
+  // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZGQ3OTQxYWE3YWYwZjA3Zjc4MjJkMiIsImlhdCI6MTcyNTk1MTM2M30.ZITLummc9bVbRM3LrJ-_u07IVsJdQYgP3AIJPhedC18";
   
 const useProductActions =()=>{
 
@@ -14,13 +14,14 @@ const useProductActions =()=>{
         setFavourite,
         setOrders,
         setOrderLoading,
+        userToken
         
       } = useContext(Context);
       
 const addToCart =  async (item) => {
     try {
       const cartItems = [{ item: item._id, quantity: 1 }];
-       await axios.post(`${url}/api/cart/add`, { cart: cartItems },{headers: { token }});
+       await axios.post(`${url}/api/cart/add`, { cart: cartItems },{headers: { token :userToken }});
 
            // Update local state
            setCart((prevCart) => {
@@ -50,7 +51,7 @@ const addToCart =  async (item) => {
       try {
         await axios.post(`${url}/api/favourite/remove`, {
           itemId: item._id,
-        },{headers: { token }});
+        },{headers: { token :userToken }});
          // Update local state
          setFavourite((prevFavourites) =>
         prevFavourites.filter((favouriteItem) => favouriteItem.favouriteProduct !== item._id)
@@ -64,7 +65,7 @@ const addToCart =  async (item) => {
         const favouriteItems = [{ favouriteProduct: item._id }];
          await axios.post(`${url}/api/favourite/add`, {
           favouriteItems,
-         },{headers: { token }});
+         },{headers: { token :userToken }});
            // Update local state
       setFavourite((prevFavourites) => [
         ...prevFavourites,
@@ -83,7 +84,7 @@ const addToCart =  async (item) => {
       try {
          await axios.post(`${url}/api/cart/increment`, {
            itemId: item._id,
-         },{headers: { token }});
+         },{headers: { token :userToken }});
   
          setCart((prevCart) =>
           prevCart.map((cartItem) =>
@@ -102,7 +103,7 @@ const addToCart =  async (item) => {
       try {
          await axios.post(`${url}/api/cart/decrement`, {
            itemId: item._id,
-         },{headers: { token }});
+         },{headers: { token :userToken }});
   
          const itemIndex = cart.findIndex(cartItem => cartItem.item === item._id);
          if (itemIndex !== -1) {
@@ -133,7 +134,7 @@ const addToCart =  async (item) => {
       try {
          await axios.post(`${url}/api/cart/remove`, {
            itemId: item._id,
-         },{headers: { token }});
+         },{headers: { token :userToken }});
   
            // Update local state
       setCart((prevCart) =>
@@ -166,7 +167,7 @@ const addToCart =  async (item) => {
     const getOrders = async () => {
       try {
         const response =await axios.post(`${url}/api/order/userorders`, {},
-          { headers : { token } })
+          { headers : { token :userToken } })
         const Orders =  response.data.data; 
         setOrders(Orders);
       } catch (error) {
@@ -181,12 +182,12 @@ const addToCart =  async (item) => {
           amount: total,
           address:address,
         }, {
-          headers: { token }
+          headers: { token :userToken }
         });
         if (response.data.success) {
           try {
            await axios.post(`${url}/api/cart/clear`, {}, {
-              headers: { token }
+              headers: { token  :userToken }
             });
             if(response.data.success){
               setCart([]);
