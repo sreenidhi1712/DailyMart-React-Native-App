@@ -81,9 +81,9 @@ function Login() {
           </TouchableOpacity>
         </View>
         <View className="flex-row justify-center items-center w-full mt-5">
-          <Text className="text-xs">Already have an account?</Text>
+          <Text className="text-xs">Don't have an account?</Text>
           <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-            <Text className="text-blue-500 text-xs ml-1">Login</Text>
+            <Text className="text-blue-500 text-xs ml-1">SignUp</Text>
           </TouchableOpacity>
         </View>
       </View>

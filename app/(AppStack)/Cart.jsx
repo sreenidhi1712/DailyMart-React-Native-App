@@ -5,6 +5,8 @@ import { useNavigation } from '@react-navigation/native';
 import useProductActions from '../../utils/useProductActions';
 import { Ionicons } from 'react-native-vector-icons'
 import CartSkeleton from '../../components/LoadingSkeletons/CartSkeleton';
+import CustomModal from '../../components/Modal';
+import LottieView from 'lottie-react-native';
 
 const Cart = () => {
 
@@ -14,6 +16,7 @@ const Cart = () => {
   const [total, setTotal] = useState(0);
   const [productWithDetails, setProductWithDetails] = useState([]);
   const [address, setAddress] = useState('');
+  const [isOpen,setIsOpen] = useState(false);
 
   useEffect(() => {
     const fetchProductDetails = async () => {
@@ -43,6 +46,7 @@ const Cart = () => {
 
  const checkoutButton = async(navigate,cart,total,address)=>{
     await handleCheckout(navigate,cart,total,address);
+    setIsOpen(true);
     setAddress('');
  }
 
@@ -157,6 +161,16 @@ const Cart = () => {
 </ScrollView>
 
 </View>}
+<CustomModal isOpen={isOpen} setIsOpen={setIsOpen}>
+  <View className="w-[90%] h-auto py-5 bg-white rounded-xl flex items-center justify-center">
+  <LottieView style={{width: 200, height: 200}} source={require('../../assets/OrderPlacedAnimation.json')} autoPlay loop />
+  <Text className="text-black font-light my-5 text-3xl">Order Placed</Text>
+  <Pressable onPress={()=>setIsOpen(false)} className="py-2 px-4 bg-green-400 rounded-lg">
+        <Text className="text-xl text-white font-bold ">Done</Text>
+    </Pressable>
+  </View>
+  
+</CustomModal>
     </SafeAreaView>
   )
 }

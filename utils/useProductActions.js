@@ -190,8 +190,11 @@ const addToCart =  async (item) => {
               headers: { token  :userToken }
             });
             if(response.data.success){
+            
               setCart([]);
-              navigation.navigate('Orders');
+              // if(!isOpen){
+              //   navigation.navigate('Orders');
+              // }
             }
           } catch (error) {
             console.error('Error emptying cart', error);
