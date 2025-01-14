@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
 import Onboarding from 'react-native-onboarding-swiper';
@@ -18,28 +18,28 @@ const navigation = useNavigation();
     onDone={gotoLogin}
   pages={[
     {
-      backgroundColor: '#f2f2f2',
+      backgroundColor: '#FEF3C7',
       image: (
-        <View style={styles.lottie}>  <LottieView source={require('../assets/OnboardingAnimation!.json')} autoPlay loop /></View>
+        <View >  <LottieView style={styles.lottie} source={require('../assets/OnboardingAnimation!.json')} autoPlay loop /></View>
     ) ,
-      title: 'Onboarding',
-      subtitle: 'Done with React Native Onboarding Swiper',
+      title: (<Text className="text-orange-600 text-7xl font-bold">DailyMart</Text>),
+      subtitle: (<Text className="text-grat-600 text-2xl font-bold">All yout daily needs in one place</Text>),
     },
 {
-    backgroundColor: '#1cb654',
+    backgroundColor: '#22c55e',
     image: (
-        <View style={styles.lottie}>  <LottieView source={require('../assets/OBAnimation2.json')} autoPlay loop /></View>
+        <View >  <LottieView style={styles.lottie} source={require('../assets/OBAnimation2.json')} autoPlay loop /></View>
     ) ,
-    title: 'Onboarding',
-    subtitle: 'Done with React Native Onboarding Swiper',
+    title: (<Text className="text-white text-5xl text-center font-bold">Your Wishlist, Your Way</Text>),
+    subtitle: (<Text className="text-gray-100 text-lg text-center font-bold">Create and Customize your perfect grocery list</Text>),
 },
 {
-    backgroundColor: '#af2626',
+    backgroundColor: '#fff',
     image: (
-        <View style={styles.lottie}> <LottieView source={require('../assets/OBAnimation3.json')} autoPlay loop /></View>
+        <View > <LottieView  style={styles.lottie} source={require('../assets/OBAnimation3.json')} autoPlay loop /></View>
     ) ,
-    title: 'Onboarding',
-    subtitle: 'Done with React Native Onboarding Swiper',
+    title: (<Text className="text-green-700 text-5xl text-center font-bold">Welcome to DailyMart</Text>),
+    subtitle: (<Text className="text-gray-800 text-2xl text-center font-bold">Your one-stop for all daily essentials, delivered with care</Text>),
 }
   ]}
 />
@@ -52,6 +52,6 @@ export default OnboardingUI
 const styles = StyleSheet.create({
     lottie:{
         width: 200,
-        height: 200
+        height: 200,
     }
 })
