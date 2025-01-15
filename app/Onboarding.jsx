@@ -23,7 +23,7 @@ const navigation = useNavigation();
         <View >  <LottieView style={styles.lottie} source={require('../assets/OnboardingAnimation!.json')} autoPlay loop /></View>
     ) ,
       title: <Text className="text-orange-600 text-7xl font-bold">DailyMart</Text>,
-      subtitle: <Text className="text-grat-600 text-2xl font-bold">All your daily needs in one place</Text>,
+      subtitle: <Text className="text-gray-600 text-2xl font-bold">All your daily needs in one place</Text>,
     },
 {
     backgroundColor: '#22c55e',

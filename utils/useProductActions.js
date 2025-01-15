@@ -175,7 +175,7 @@ const addToCart =  async (item) => {
       }
     }
 
-    const handleCheckout = async (navigation,cart,total,address) => {
+    const handleCheckout = async (cart,total,address) => {
       try {
         const response = await axios.post(`${url}/api/order/place`, {
           items: cart,
@@ -190,11 +190,7 @@ const addToCart =  async (item) => {
               headers: { token  :userToken }
             });
             if(response.data.success){
-            
               setCart([]);
-              // if(!isOpen){
-              //   navigation.navigate('Orders');
-              // }
             }
           } catch (error) {
             console.error('Error emptying cart', error);

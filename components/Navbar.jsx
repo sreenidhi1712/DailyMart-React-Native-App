@@ -3,7 +3,8 @@ import { View, Text, TextInput, FlatList, KeyboardAvoidingView, Pressable } from
 import { Context } from '@/Context/Context'
 import ProductContainer from './ProductContainer'
 import useProductActions from '../utils/useProductActions'
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useNavigation } from '@react-navigation/native'
+import { Ionicons } from 'react-native-vector-icons'
 // Adjust the import path as needed
 
 const Navbar = () => {
@@ -11,6 +12,7 @@ const Navbar = () => {
   const [filteredProducts, setFilteredProducts] = useState([])
   const { products,favourite,setUserToken } = useContext(Context);
     const { addToCart, addtofavourites } = useProductActions;
+    const navigation = useNavigation();
 
   useEffect(() => {
     if (searchTerm) {
@@ -24,22 +26,17 @@ const Navbar = () => {
     }
   }, [searchTerm, products])
 
-  const handleLogout = async () => {
-    try {
-      await AsyncStorage.removeItem('userToken');
-      setUserToken(null);
-    } catch (error) {
-      console.error('Error logging out', error);
-    }
-  };
+const handleProfileNavigation =()=>{
+navigation.navigate('Profile');
+}
 
   return (
     <View className="w-full flex items-center pb-4 fixed top-0 left-0 bg-white">
       <View className="w-full flex flex-row justify-between items-center p-3 ">
-          <Text className="text-3xl font-bold text-green-800 self-start ml-5">DailyMart</Text>
-          <Pressable onPress={handleLogout} className="self-end mr-3 p-3 bg-green-400 rounded-xl" ><Text className="text-white font-bold">Logout</Text></Pressable>
+          <Text className="text-3xl font-bold text-green-800 self-start ml-5 mt-5">DailyMart</Text>
+          <Pressable onPress={handleProfileNavigation} className="self-end mr-3 " ><Ionicons name="person-circle-outline" size={55} color="gray"/></Pressable>
       </View>
-      <View className="w-[95%] mt-5 bg-[#BFF6C3] flex items-center rounded-3xl p-3">
+      <View className="w-[95%] mt-1 bg-[#BFF6C3] flex items-center rounded-3xl p-3">
         <Text className="text-3xl font-bold text-green-800">What would you like to order</Text>
         <TextInput
           placeholder="Enter name of product"

@@ -20,6 +20,11 @@ module.exports = {
       animation: {
         shimmer: 'shimmer 1.7s infinite linear',
       },
+      fontFamily: {
+        sans: ['System', 'sans-serif'],
+        serif: ['Georgia', 'serif'],
+        mono: ['Courier', 'monospace'],
+      },
     },
   },
   plugins: [],

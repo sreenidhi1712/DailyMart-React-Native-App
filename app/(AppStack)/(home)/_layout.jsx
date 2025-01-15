@@ -7,6 +7,7 @@ import ProductDetails from './ProductDetails'
 import ProductList from './ProductList'
 import OrderDetails from './OrderDetails'
 import Category from './Category'
+import ProfilePage from './ProfilePage'
 
 
 
@@ -23,6 +24,7 @@ const HomeLayout = () => {
           headerLeft: () => "", 
           headerTitleAlign:"left"
         }}/>
+        <Stack.Screen name='Profile' component={ProfilePage}options={{title:"Profile",headerShown:false}} />
     </Stack.Navigator>
   )
 }

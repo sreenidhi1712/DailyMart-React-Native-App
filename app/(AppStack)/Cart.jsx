@@ -44,14 +44,18 @@ const Cart = () => {
     fetchProductDetails();
   }, [ cart, products]);
 
- const checkoutButton = async(navigate,cart,total,address)=>{
-    await handleCheckout(navigate,cart,total,address);
+ const checkoutButton = async(cart,total,address)=>{
+    await handleCheckout(cart,total,address);
     setIsOpen(true);
     setAddress('');
  }
 
+ const handleModal =()=>{
+    setIsOpen(false);
+    navigate.navigate('Orders');
+ }
   return (
-    <SafeAreaView className="flex-1  ">
+    <SafeAreaView className="flex-1">
       {loading ?<CartSkeleton/>: <View className="w-full ">
         
      
@@ -145,7 +149,7 @@ const Cart = () => {
            </View>
 
            <View>
-                <Pressable onPress={()=>checkoutButton(navigate,cart,total,address)} disabled={address === ''} >
+                <Pressable onPress={()=>checkoutButton(cart,total,address)} disabled={address === ''} >
                     <View className={`w-[100%] bg-green-300 justify-center rounded-lg  flex items-center p-4 mt-5 ${address === '' ? 'bg-slate-200' : ''}`}>
                         <Text className="text-xl text-white font-bold ">Checkout</Text>
                     </View>
@@ -165,7 +169,7 @@ const Cart = () => {
   <View className="w-[90%] h-auto py-5 bg-white rounded-xl flex items-center justify-center">
   <LottieView style={{width: 200, height: 200}} source={require('../../assets/OrderPlacedAnimation.json')} autoPlay loop />
   <Text className="text-black font-light my-5 text-3xl">Order Placed</Text>
-  <Pressable onPress={()=>setIsOpen(false)} className="py-2 px-4 bg-green-400 rounded-lg">
+  <Pressable onPress={handleModal} className="py-2 px-4 bg-green-400 rounded-lg">
         <Text className="text-xl text-white font-bold ">Done</Text>
     </Pressable>
   </View>

@@ -10,7 +10,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { setUserToken } = useContext(Context); 
+  const { setUserToken ,setUserName} = useContext(Context); 
 
   const navigation = useNavigation();
 
@@ -40,6 +40,7 @@ function Login() {
 
       if (response.data.success) {
         await AsyncStorage.setItem('userToken', response.data.token);
+        setUserName(response.data.name);
         setUserToken(response.data.token)
         Alert.alert("Success", "Login successfully");
         // navigation.navigate('(AppStack)'); // Navigate to the login screen
@@ -54,36 +55,36 @@ function Login() {
   return (
     <View className="flex-1 bg-green-200 justify-center items-center">
       <View className="w-11/12 md:w-1/2 lg:w-1/3 bg-white rounded-xl p-5 shadow-lg">
-        <Text className="text-3xl font-bold mt-5 text-center">Login Up</Text>
+        <Text className="text-3xl font-extrabold mt-5 text-center">Login</Text>
         <View className="w-full mt-5">
-          <Text className="mt-2 font-bold text-lg">Email</Text>
+         
           <TextInput
-            style={{ borderWidth: 0.1, borderColor: '#ccc', borderRadius: 15, padding: 10, marginTop: 5 }}
+            style={{ borderWidth: 1, borderColor: '#ccc', borderRadius: 5, padding: 10, marginTop: 5 }}
             placeholder="Email"
             value={email}
             onChangeText={setEmail}
-            className="w-full h-10"
+            className="w-full h-14  placeholder:text-gray-400"
           />
-          <Text className="mt-5 font-bold text-lg">Password</Text>
+         
           <TextInput
-            style={{ borderWidth: 0.1, borderColor: '#ccc', borderRadius: 15, padding: 10, marginTop: 5 }}
+            style={{ borderWidth: 1, borderColor: '#ccc', borderRadius: 5, padding: 10, marginTop: 25 }}
             placeholder="Password"
             value={password}
             onChangeText={setPassword}
             secureTextEntry
-            className="w-full h-10"
+            className="w-full h-14 placeholder:text-gray-400"
           />
           <TouchableOpacity
             onPress={handleSubmit}
-            className="bg-green-400 w-full text-white text-xl font-bold h-10 mt-5 rounded-lg justify-center items-center"
+            className="bg-green-400 w-full text-white text-xl font-bold h-12 mt-8 rounded-md justify-center items-center"
           >
-            <Text className="text-white">Login</Text>
+            <Text className="text-white  text-2xl font-bold">Login</Text>
           </TouchableOpacity>
         </View>
         <View className="flex-row justify-center items-center w-full mt-5">
-          <Text className="text-xs">Don't have an account?</Text>
+          <Text className="text-sm font-bold">Don't have an account ? </Text>
           <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-            <Text className="text-blue-500 text-xs ml-1">SignUp</Text>
+            <Text className="text-blue-500 text-sm ml-1 font-bold">SignUp</Text>
           </TouchableOpacity>
         </View>
       </View>

@@ -12,6 +12,7 @@ const ContextProvider = (props) => {
   const [favourite, setFavourite] = useState([]);
   const [orderLoading, setOrderLoading] = useState(false);
   const [userToken, setUserToken] = useState(null);
+  const [userName, setUserName] = useState('');
 
 
   const fruitsAndVegetables = products.filter((item) => item.category === 'Fruits' || item.category === 'Vegetables');
@@ -40,6 +41,8 @@ const ContextProvider = (props) => {
     setOrderLoading,
     userToken,
     setUserToken,
+    userName,
+     setUserName
   };
 
   useEffect(() => {
